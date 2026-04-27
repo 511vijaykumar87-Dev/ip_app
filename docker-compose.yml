@@ -1,0 +1,41 @@
+name: ip_apps
+services:
+  fastapi_backend:
+    build: 
+      context: ./fastapi
+    image: fastapi:latest
+    container_name: fastapi_container
+    ports:
+       - "8080:8000"
+    environment:
+       test: example
+       test1: exampledb
+    
+    networks:
+       - ip_app_bridge
+    volumes:
+       - fastapi_data:/app   
+
+  flask_app:
+    build: 
+      context: ./flask
+    image: flask:latest
+    ports:
+       - "8081:8000"
+
+  nodejs:
+    build: 
+      context: ./nodejs
+    image: nodejs:latest
+    ports:
+       - "8082:8000"     
+
+networks:
+    ip_app_bridge:
+        name: ip_app_bridge_new
+        driver: bridge
+volumes:
+    fastapi_data:
+        name: ip_app_fastapi_data
+        driver: local
+
