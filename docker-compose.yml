@@ -4,7 +4,7 @@ services:
     build: 
       context: ./fastapi
     image: fastapi:latest
-    container_name: fastapi_container
+    container_name: fast_api
     ports:
        - "8080:8000"
     environment:
